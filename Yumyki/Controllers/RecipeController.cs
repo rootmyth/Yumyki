@@ -20,18 +20,6 @@ namespace Yumyki.Controllers
             return _recipeRepo.GetAllRecipes();
         }
 
-        [HttpGet("Ingredients/{recipeId}")]
-        public List<RecipeIngredient> GetRecipeIngredients(int recipeId)
-        {
-            return _recipeRepo.GetRecipeIngredients(recipeId);
-        }
-
-        [HttpGet("Instructions/{recipeId}")]
-        public List<InstructionStep> GetRecipeInstructions(int recipeId)
-        {
-            return _recipeRepo.GetRecipeInstructions(recipeId);
-        }
-
         [HttpPost]
         public void PostRecipe(Recipe recipe)
         {
