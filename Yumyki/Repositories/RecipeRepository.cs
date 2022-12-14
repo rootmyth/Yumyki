@@ -15,7 +15,9 @@ namespace Yumyki.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                SELECT * FROM Recipe
+                                SELECT Id, [User].Username, RecipeName, RecipeType, RecipeImageURL, CookTime, Servings, DateAdded
+                                FROM Recipe
+                                JOIN [User] ON [User].Id = Recipe.UserId
                             ";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -27,6 +29,7 @@ namespace Yumyki.Repositories
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                CreatorName = reader.GetString(reader.GetOrdinal("[User].Username")),
                                 RecipeName = reader.GetString(reader.GetOrdinal("RecipeName")),
                                 RecipeType = reader.GetString(reader.GetOrdinal("RecipeType")),
                                 RecipeImageURL = reader.IsDBNull(reader.GetOrdinal("RecipeImageURL")) ? "No Image URL" : reader.GetString(reader.GetOrdinal("RecipeImageURL")),
@@ -41,85 +44,6 @@ namespace Yumyki.Repositories
                 }
             }
         }
-
-        public List<RecipeIngredient> GetRecipeIngredients(int recipeId)
-        {
-            using (SqlConnection conn = Connection)
-            {
-                conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                                SELECT ri.Id AS Id, RecipeId, IngredientId, IngredientName, IngredientType, Quantity, QuantityUnit, Note
-                                FROM RecipeIngredient ri
-                                JOIN Ingredient AS i ON i.Id = ri.IngredientId
-                                WHERE ri.RecipeId = @RecipeId
-                            ";
-                    cmd.Parameters.AddWithValue("@RecipeId", recipeId);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        List<RecipeIngredient> recipeIngredients = new();
-                        while (reader.Read())
-                        {
-                            RecipeIngredient recipeIngredient = new RecipeIngredient()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                RecipeId = reader.GetInt32(reader.GetOrdinal("RecipeId")),
-                                IngredientId = reader.GetInt32(reader.GetOrdinal("IngredientId")),
-                                Ingredient = new Ingredient()
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("IngredientId")),
-                                    IngredientName = reader.GetString(reader.GetOrdinal("IngredientName")),
-                                    IngredientType = reader.GetString(reader.GetOrdinal("IngredientType"))
-                                },
-                                Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
-                                QuantityUnit = reader.IsDBNull(reader.GetOrdinal("QuantityUnit")) ? null : reader.GetString(reader.GetOrdinal("QuantityUnit")),
-                                Note = reader.IsDBNull(reader.GetOrdinal("Note")) ? "No Note" : reader.GetString(reader.GetOrdinal("Note"))
-
-                            };
-                            recipeIngredients.Add(recipeIngredient);
-                        }
-                        return recipeIngredients;
-                    }
-                }
-            }
-        }
-
-        public List<InstructionStep> GetRecipeInstructions(int recipeId)
-        {
-            using (SqlConnection conn = Connection)
-            {
-                conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                                SELECT * From InstructionStep
-                                WHERE InstructionStep.RecipeId = @RecipeId
-                            ";
-                    cmd.Parameters.AddWithValue("@RecipeId", recipeId);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        List<InstructionStep> instructionSteps = new();
-                        while (reader.Read())
-                        {
-                            InstructionStep instructionStep = new InstructionStep()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                RecipeId = reader.GetInt32(reader.GetOrdinal("RecipeId")),
-                                StepNumber = reader.GetInt32(reader.GetOrdinal("StepNumber")),
-                                StepText = reader.GetString(reader.GetOrdinal("StepText"))
-
-                            };
-                            instructionSteps.Add(instructionStep);
-                        }
-                        return instructionSteps;
-                    }
-                }
-            }
-        }
-
         public void InsertRecipeTableValues(Recipe recipe)
         {
             using (SqlConnection conn = Connection)
@@ -155,7 +79,7 @@ namespace Yumyki.Repositories
                     {
                         cmd.Parameters.Clear();
                         cmd.CommandText = @"
-                            IF NOT EXISTS (SELECT 1 FROM Ingredient WHERE IngredientName = @IngredientName AND IngredientType = @IngredientType)
+                            IF NOT EXISTS (SELECT 1 FROM Ingredient WHERE IngredientName = @IngredientName)
                             BEGIN
                             INSERT INTO Ingredient (IngredientName, IngredientType)
                             VALUES (@IngredientName, @IngredientType)
@@ -183,7 +107,7 @@ namespace Yumyki.Repositories
                         cmd.Parameters.Clear();
                         cmd.CommandText = @"
                         INSERT INTO RecipeIngredient (RecipeId, IngredientId, Quantity, QuantityUnit, Note)
-                        VALUES ((SELECT Id FROM Recipe WHERE RecipeName = @RecipeName), (SELECT Id FROM Ingredient WHERE IngredientName = @IngredientName AND IngredientType = @IngredientType), @Quantity, @QuantityUnit, @Note)
+                        VALUES ((SELECT Id FROM Recipe WHERE RecipeName = @RecipeName), (SELECT Id FROM Ingredient WHERE IngredientName = @IngredientName), @Quantity, @QuantityUnit, @Note)
                         ";
                         cmd.Parameters.AddWithValue("@RecipeName", recipe.RecipeName);
                         cmd.Parameters.AddWithValue("@IngredientName", recipeIngredient.Ingredient.IngredientName);
