@@ -7,6 +7,7 @@ namespace Yumyki.Models
         public int Id { get; set; }
         [Required]
         public int UserId { get; set; }
+        public string? CreatorName { get; set; }
         public string? RecipeName { get; set; }
         public string? RecipeType { get; set; }
         public string? RecipeImageURL { get; set; }
