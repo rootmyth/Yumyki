@@ -28,7 +28,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IIngredientRepository, IngredientRepository>();
+builder.Services.AddTransient<IInstructionStepRepository, InstructionStepRepository>();
+builder.Services.AddTransient<ILibraryRepository, LibraryRepository>();
+builder.Services.AddTransient<IMealPlanRecipeRepository, MealPlanRecipeRepository>();
+builder.Services.AddTransient<IMealPlanRepository, MealPlanRepository>();
 builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
+builder.Services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
