@@ -5,7 +5,7 @@ using Yumyki.Models;
 
 namespace Yumyki.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class InstructionStepController : ControllerBase
     {
@@ -15,10 +15,16 @@ namespace Yumyki.Controllers
             _InstructionStepRepo = instructionStepRepository;
         }
 
-        [HttpGet("Instructions/{recipeId}")]
+        [HttpGet("{recipeId}")]
         public List<InstructionStep> GetRecipeInstructions(int recipeId)
         {
             return _InstructionStepRepo.GetRecipeInstructions(recipeId);
+        }
+
+        [HttpPut("Update")]
+        public void UpdateRecipeInstructions(List<InstructionStep> steps)
+        {
+            _InstructionStepRepo.UpdateRecipeInstructions(steps);
         }
     }
 }
