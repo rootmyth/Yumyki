@@ -1,0 +1,35 @@
+.GroceryList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.GroceryListItem {
+    background-image: linear-gradient(rgb(0, 0, 70), rgb(70, 0, 140));
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    margin: 1em;
+    padding: 2em;
+    width: fit-content;
+}
+
+.GroceryListItem__title {
+    text-decoration: underline;
+}
+
+.GroceryListItem__info {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    opacity: 1;
+    text-decoration: none;
+    transition: opacity 0.5s, text-decoration 0.5s;
+}
+
+.GLinfo__item {
+    padding: 0 0.5em 0 0;
+}
+
+.checked {
+    opacity: 0.25;
+    text-decoration: line-through;
+}

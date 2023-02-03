@@ -1,0 +1,9 @@
+.BrowseRecipes {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em;
+}
+
+.Browse__item {
+    margin: 2em;
+}

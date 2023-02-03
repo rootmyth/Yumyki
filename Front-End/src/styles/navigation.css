@@ -1,0 +1,38 @@
+.Navigation {
+    background-color: rgb(0, 0, 70);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* margin: 1em 0 0 0; */
+}
+
+.Navigation__icons {
+    display: flex;
+    justify-content: right;
+}
+
+.Navigation__logo {
+    padding: 0.5em 2em;
+}
+
+.Navigation__logo__png {
+    height: 60px;
+}
+
+.NavUnit {
+    display: flex;
+    padding: 0 1.2em;
+}
+
+.NavUnit:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+}
+
+.NavIcon {
+    color: rgb(255, 207, 90);
+    padding: 0.5em 0.5em 0.5em 0;
+}
+
+.NavImg {
+    width: 60px;
+    height: 60px;
+}

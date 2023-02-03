@@ -1,0 +1,70 @@
+.AddRecipe {
+    margin: 0;
+}
+
+.AddRecipe__main,
+.AddRecipe__ingredients,
+.AddRecipe__instructions {
+    background-image: linear-gradient(rgb(0, 0, 70), rgb(70, 0, 140));
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    margin: 1em;
+    padding: 1em;
+    width: fit-content;
+}
+
+.AddRecipe__submit {
+    margin: 1em;
+}
+
+.AddRecipe__ingredients__columnTitles {
+    color:rgb(255, 207, 90);
+    display: grid;
+    font-size: 1.5em;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.columnWidth {
+    padding: 0 0 0 0.5em;
+}
+
+.AddRecipe__field {
+    color: rgb(255, 207, 90);
+    display: flex;
+}
+
+.label {
+    color: rgb(255, 207, 90);
+}
+
+.IngredientFieldsButtons,
+.InstructionFieldsButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddField,
+.RemoveField {
+    color: rgb(255, 207, 90);
+    cursor: pointer;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.AddField:hover,
+.RemoveField:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+    border-radius: 0.5em;
+}
+
+.AddField:active,
+.RemoveField:active {
+    background-color: rgb(255, 207, 90);
+    background-image: none;
+}
+
+.AddField__icon,
+.RemoveField__icon {
+    height: 50px;
+    margin: 0 1em 0 1em;
+}

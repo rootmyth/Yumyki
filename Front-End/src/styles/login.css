@@ -1,0 +1,34 @@
+.LogIn {
+    align-items: center;
+    background-image: linear-gradient(rgb(0, 0, 70), rgb(70, 0, 140));
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    margin: 20vh auto;
+    padding: 2em;
+    width: fit-content;
+}
+
+.LogIn__logo {
+    width: 50em;
+}
+
+.LogIn__button {
+    color: rgb(255, 207, 90);
+    border-radius: 0.5em;
+    padding: 0.5em 2em 0.5em 2em;
+    cursor: pointer;
+}
+
+.LogIn__button:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+}
+
+.LogIn__button:active {
+    background-color: rgb(255, 207, 90);
+    background-image: none;
+}
+
+.LogIn__icon {
+    height: 50px;
+}

@@ -1,0 +1,93 @@
+.RecipeDetails__buttons {
+    padding: 0;
+}
+
+.Back {
+    background-color: rgb(0, 0, 70);
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    cursor: pointer;
+    margin: auto 0 auto 0;
+    padding: 0.5em 2em 0.5em 2em;
+    text-align: center;
+    width: fit-content;
+}
+
+.Back:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+}
+
+.Back:active {
+    background-color: rgb(255, 207, 90);
+    background-image: none;
+}
+
+.Back__icon {
+    height: 40px;
+}
+
+.RecipeDetails__info {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+.RecipeDetails__image {
+    background-image: linear-gradient(rgb(0, 0, 70), rgb(70, 0, 140));
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    height: fit-content;
+    margin: 1em;
+    padding: 2em;
+}
+
+.RecipeDetails__image__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 0.5em 0 0.5em;;
+}
+
+.RecipeDetails__edit {
+    background-color: rgb(0, 0, 70);
+    border-radius: 0.5em;;
+    color: rgb(255, 207, 90);
+    cursor: pointer;
+    padding: 0.5em 2em 0.5em 2em;
+}
+
+.RecipeDetails__button {
+    border-radius: 0.5em;;
+    color: rgb(255, 207, 90);
+    cursor: pointer;
+    padding: 0.5em;
+}
+
+.RecipeDetails__edit:hover,
+.RecipeDetails__button:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+}
+
+.RecipeDetails__edit:active,
+.RecipeDetails__button:active {
+    background-color: rgb(255, 207, 90);
+    background-image: none;
+}
+
+.RecipeDetails__edit__icon {
+    height: 50px;
+    padding: 0 0 0 0.5em;
+}
+
+.RecipeDetails__button__ingredientsIcon,
+.RecipeDetails__button__instructionsIcon {
+    height: 50px;
+}
+
+.RecipeDetails__details {
+    background-image: linear-gradient(rgb(0, 0, 70), rgb(70, 0, 140));
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    margin: 1em;
+    padding: 2em;
+    width: 40em;
+}

@@ -1,0 +1,52 @@
+.MealPlanRecipes {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em;
+}
+
+.MealPlan__item {
+    margin: 2em;
+}
+
+.MealComplete {
+    background-color: rgb(0, 0, 70);
+    border-radius: 0 0 0.5em 0.5em;
+    color: rgb(255, 207, 90);
+    cursor: pointer;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.ShowGroceryList,
+.ConfirmMealPlan {
+    background-color: rgb(0, 0, 70);
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    cursor: pointer;
+    height: fit-content;
+    margin: auto 0 auto 0;
+    padding: 0.5em 2em 0.5em 2em;
+}
+
+.MealComplete:hover,
+.ShowGroceryList:hover,
+.ConfirmMealPlan:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+}
+
+.MealComplete:active,
+.ShowGroceryList:active
+.ConfirmMealPlan:active {
+    background-color: rgb(255, 207, 90);
+    background-image: none;
+}
+
+.MealComplete__icon {
+    height: 50px;
+}
+
+.ShowGroceryList__icon,
+.ConfirmMealPlan__icon {
+    height: 50px;
+    margin: 0 0 0 0.5em;
+}

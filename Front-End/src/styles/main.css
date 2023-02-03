@@ -1,3 +1,95 @@
 body {
-  background-color: lightblue !important;
+  background-attachment: fixed;
+  background-image: url("../images/background.svg") !important;
+  background-color: rgb(255, 207, 90) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: rgb(255, 207, 90) !important;
+  text-decoration: none;
+}
+
+h2 {
+  color: rgb(255, 207, 90)!important;
+}
+
+input, textarea {
+  background-color:rgba(0, 0, 70, 0.05) !important;
+  border-color: rgb(255, 207, 90)!important;
+  border-style: solid !important;
+  border-width: 0.25em !important;
+  color: rgb(255, 207, 90)!important;
+  padding: 0.5em !important;
+  margin: 0.5em !important;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+}
+
+.title {
+  
+  color: rgb(0, 0, 70);
+  font-size: 5em;
+  width: fit-content;
+}
+
+.MealPlan__item .Library__item {
+  width: 256px;
+}
+
+.RecipeCard {
+  cursor: pointer;
+}
+
+.cardButton {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonText {
+  margin: auto 0.5em auto 0;
+}
+
+.AddIngredient {
+  display: flex;
+  
+}
+
+.RecipeDetails__info {
+  display: flex;
+}
+
+.completedMeal {
+  opacity: 0.5;
+}
+
+.greenButton {
+  width: auto;
+  cursor: pointer;
+  color: darkgreen;
+  padding: 0.5em;
+}
+
+.greenButton:hover {
+  background-color: darkgreen;
+  color: lightgreen;
+}
+
+.redButton {
+  width: auto;
+  cursor: pointer;
+  color: darkred;
+  padding: 0.5em;
+}
+
+.redButton:hover {
+  background-color: darkred;
+  color: pink;
 }

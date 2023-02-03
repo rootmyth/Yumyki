@@ -1,0 +1,45 @@
+.ShowAddRecipe {
+    background-color: rgb(0, 0, 70);
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    cursor: pointer;
+    margin: auto 0 auto 0;
+    padding: 0.5em 2em 0.5em 2em;
+    text-align: center;
+}
+
+.ShowAddRecipe__icon {
+    height: 50px;
+    padding: 0 0 0 0.5em;
+}
+
+.ShowAddRecipe:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+}
+
+.ShowAddRecipe:active {
+    background-color: rgb(255, 207, 90);
+    background-image: none;
+}
+
+.LibraryRecipes {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em;
+}
+
+.Library__item {
+    margin: 2em;
+}
+
+.Library__item__buttons {
+    background-color: rgb(0, 0, 70);
+    border-radius: 0 0 0.5em 0.5em;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.mealPlanAdd__disabled {
+    height: 50px;
+    margin: 0.5em;
+}

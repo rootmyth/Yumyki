@@ -1,0 +1,42 @@
+.RegisterUsername {
+    align-items: center;
+    background-image: linear-gradient(rgb(0, 0, 70), rgb(70, 0, 140));
+    border-radius: 0.5em;
+    color: rgb(255, 207, 90);
+    display: flex;
+    flex-direction: column;
+    margin: 20vh auto;
+    padding: 2em;
+    width: 50em;
+}
+
+.RegisterUsername__input {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 2em 0 0 0;
+    width: 40em;
+}
+
+.Username {
+    margin: 2em 0 2em 0;
+}
+
+.RegisterUsername__button {
+    border-radius: 0.5em;
+    padding: 0.5em 2em 0.5em 2em;
+    cursor: pointer;
+}
+
+.RegisterUsername__button:hover {
+    background-image: linear-gradient(rgb(0, 0, 140), rgb(70, 0, 140));
+}
+
+.RegisterUsername__button:active {
+    background-color: rgb(255, 207, 90);
+    background-image: none;
+}
+
+.RegisterUsername__icon {
+    height: 50px;
+}
