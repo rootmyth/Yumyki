@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Yumyki.Interfaces;
 using Yumyki.Models;
 
 namespace Yumyki.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class IngredientController : ControllerBase
     {
@@ -15,7 +16,7 @@ namespace Yumyki.Controllers
             _ingredientRepo = ingredientRepository;
         }
 
-        [HttpGet]
+        [HttpGet("All")]
         public List<Ingredient> GetAllIngredients()
         {
             return _ingredientRepo.GetAllIngredients();
