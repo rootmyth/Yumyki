@@ -5,7 +5,7 @@ using Yumyki.Models;
 
 namespace Yumyki.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class LibraryController : ControllerBase
     {
@@ -15,17 +15,22 @@ namespace Yumyki.Controllers
             _libraryRepo = libraryRepository;
         }
 
+        [HttpGet("{userId}")]
         public List<Recipe> GetLibraryRecipes(int userId)
         {
             return _libraryRepo.GetLibraryRecipes(userId);
         }
+
+        [HttpPost("Add/{userId}/{recipeId}")]
         public void PostRecipeToLibrary(int userId, int recipeId)
         {
             _libraryRepo.PostRecipeToLibrary(userId, recipeId);
         }
-        public void DeleteRecipeFromLibrary(int Id)
+
+        [HttpDelete("Remove/{recipeId}")]
+        public void DeleteRecipeFromLibrary(int recipeId)
         {
-            _libraryRepo.DeleteRecipeFromLibrary(Id);
+            _libraryRepo.DeleteRecipeFromLibrary(recipeId);
         }
     }
 }
