@@ -5,7 +5,7 @@ using Yumyki.Models;
 
 namespace Yumyki.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MealPlanController : ControllerBase
     {
@@ -16,35 +16,46 @@ namespace Yumyki.Controllers
         }
 
         //Current Plan
-        [HttpGet("CurrentPlan")]
-        public MealPlan GetCurrentMealPlan(int userId)
+        [HttpGet("CurrentPlan/{userId}")]
+        public IActionResult GetCurrentMealPlan(int userId)
         {
-            return _mealPlanRepo.GetCurrentMealPlan(userId);
+            MealPlan mealPlan = _mealPlanRepo.GetCurrentMealPlan(userId);
+            if (mealPlan == null)
+            {
+                return NotFound();
+            }
+            List<MealPlanRecipe> mealPlanRecipeList = _mealPlanRepo.GetMealPlanRecipes(mealPlan.Id);
+            mealPlan.MealPlanRecipeList = new();
+            foreach (MealPlanRecipe mealPlanRecipe in mealPlanRecipeList)
+            {
+                mealPlan.MealPlanRecipeList.Add(mealPlanRecipe);
+            }
+            return Ok(mealPlan);
         }
 
         //Plan History
-        [HttpGet("History")]
+        [HttpGet("History/{userId}")]
         public List<MealPlan> GetMealPlanHistory(int userId)
         {
             return _mealPlanRepo.GetMealPlanHistory(userId);
         }
 
         //Confirm
-        [HttpPut("Confirm")]
+        [HttpPut("Confirm/{id}")]
         public void ConfirmMealPlan(int id)
         {
             _mealPlanRepo.ConfirmMealPlan(id);
         }
 
         //Complete
-        [HttpPut("Complete")]
+        [HttpPut("Complete/{id}")]
         public void CompleteMealPlan(int id)
         {
             _mealPlanRepo.CompleteMealPlan(id);
         }
 
         //Post
-        [HttpPost]
+        [HttpPost("Create/{userId}")]
         public void PostMealPlan(int userId)
         {
             _mealPlanRepo.PostMealPlan(userId);
