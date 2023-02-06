@@ -9,6 +9,7 @@ namespace Yumyki.Interfaces
         void InsertIngredientTableValues(Recipe recipe);
         void InsertRecipeIngredientTableValues(Recipe recipe);
         void InsertInstructionStepTableValues(Recipe recipe);
+        void AddPostedRecipeToLibrary(Recipe recipe);
         void DeleteRecipe(int recipeId);
         void UpdateRecipe(Recipe recipe);
     }

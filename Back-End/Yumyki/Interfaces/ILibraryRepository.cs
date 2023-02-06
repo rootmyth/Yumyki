@@ -6,6 +6,6 @@ namespace Yumyki.Interfaces
     {
         List<Recipe> GetLibraryRecipes(int userId);
         void PostRecipeToLibrary(int userId, int recipeId);
-        void DeleteRecipeFromLibrary(int Id);
+        void DeleteRecipeFromLibrary(int recipeId);
     }
 }
