@@ -5,7 +5,7 @@ using Yumyki.Models;
 
 namespace Yumyki.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RecipeIngredientController : ControllerBase
     {
@@ -15,13 +15,19 @@ namespace Yumyki.Controllers
             _recipeIngredientRepo = recipeRepository;
         }
 
-        [HttpGet]
+        [HttpGet("{recipeId}")]
         public List<RecipeIngredient> GetRecipeIngredients(int recipeId)
         {
             return _recipeIngredientRepo.GetRecipeIngredients(recipeId);
         }
 
-        [HttpPut]
+        [HttpGet("Plan/{mealPlanId}")]
+        public List<RecipeIngredient> GetMealPlanIngredients(int mealPlanId)
+        {
+            return _recipeIngredientRepo.GetMealPlanIngredients(mealPlanId);
+        }
+
+        [HttpPut("Update")]
         public void UpdateRecipeIngredients(List<RecipeIngredient> recipeIngredientList)
         {
             _recipeIngredientRepo.InsertIngredientTableValues(recipeIngredientList);
