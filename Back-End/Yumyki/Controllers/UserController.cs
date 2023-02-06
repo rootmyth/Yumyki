@@ -5,7 +5,7 @@ using Yumyki.Models;
 
 namespace Yumyki.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -15,7 +15,7 @@ namespace Yumyki.Controllers
             _userRepo = usereRepository;
         }
 
-        [HttpGet]
+        [HttpGet("{firebaseId}")]
         public IActionResult GetUser(string firebaseId)
         {
             User user = _userRepo.GetUser(firebaseId);
@@ -26,21 +26,24 @@ namespace Yumyki.Controllers
             return Ok(user);
         }
 
-        [HttpGet("DoesUserExist")]
-        public IActionResult CheckIfUserExists(string firebaseId)
+        [HttpGet("DoesUserExist/{firebaseId}")]
+        public bool CheckIfUserExists(string firebaseId)
         {
-            User user = _userRepo.GetUser(firebaseId);
-            if (user == null)
+            bool userExists = _userRepo.CheckIfUserExists(firebaseId);
+            if (!userExists)
             {
-                return NotFound();
+                return false;
             }
-            return Ok();
+            return true;
         }
 
         [HttpPost]
-        public void PostUser(User user)
+        public User PostUser(User user)
         {
             _userRepo.PostUser(user);
+            User createdUser = new();
+            createdUser = _userRepo.GetUser(user.FirebaseId);
+            return createdUser;
         }
     }
 }
