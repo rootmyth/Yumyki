@@ -20,19 +20,26 @@ namespace Yumyki.Controllers
             return _recipeRepo.GetAllRecipes();
         }
 
-        [HttpPost]
+        [HttpPost("New")]
         public void PostRecipe(Recipe recipe)
         {
             _recipeRepo.InsertRecipeTableValues(recipe);
             _recipeRepo.InsertIngredientTableValues(recipe);
             _recipeRepo.InsertRecipeIngredientTableValues(recipe);
             _recipeRepo.InsertInstructionStepTableValues(recipe);
+            _recipeRepo.AddPostedRecipeToLibrary(recipe);
         }
 
-        [HttpDelete]
+        [HttpDelete("Remove/{recipeId}")]
         public void DeleteRecipe(int recipeId)
         {
             _recipeRepo.DeleteRecipe(recipeId);
+        }
+
+        [HttpPut("Update")]
+        public void UpdateRecipe(Recipe recipe)
+        {
+            _recipeRepo.UpdateRecipe(recipe);
         }
     }
 }
