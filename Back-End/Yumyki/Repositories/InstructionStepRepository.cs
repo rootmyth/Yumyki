@@ -7,6 +7,7 @@ namespace Yumyki.Repositories
     public class InstructionStepRepository : BaseRepository, IInstructionStepRepository
     {
         public InstructionStepRepository(IConfiguration configuration) : base(configuration) { }
+
         public List<InstructionStep> GetRecipeInstructions(int recipeId)
         {
             using (SqlConnection conn = Connection)
@@ -40,15 +41,17 @@ namespace Yumyki.Repositories
                 }
             }
         }
+
         public void UpdateRecipeInstructions(List<InstructionStep> instructionStepList)
         {
             using (SqlConnection conn = Connection)
             {
-                conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
+                foreach (InstructionStep instructionStep in instructionStepList)
                 {
-                    foreach (InstructionStep instructionStep in instructionStepList)
+                    conn.Open();
+                    using (SqlCommand cmd = conn.CreateCommand())
                     {
+                    
                         cmd.CommandText = @"
                             UPDATE InstructionStep
                             SET StepText = @StepText
@@ -59,8 +62,8 @@ namespace Yumyki.Repositories
 
                         cmd.ExecuteNonQuery();
                     }
+                    conn.Close();
                 }
-                conn.Close();
             }
         }
     }
