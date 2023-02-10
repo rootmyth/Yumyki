@@ -16,12 +16,13 @@ namespace Yumyki.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                SELECT Id, UserId, RecipeName, RecipeType, RecipeImageURL, CookTime, Servings, DateAdded
-                                From Recipe
-                                JOIN LibraryRecipe ON LibraryRecipe.RecipeId = Recipe.Id
-                                WHERE LibraryRecipe.UserId = @UserId
-                            ";
-                    cmd.Parameters.AddWithValue("@MealPlanId", userId);
+                        SELECT r.Id, r.UserId, u.UserName, RecipeName, RecipeType, RecipeImageURL, CookTime, Servings, DateAdded
+                        From Recipe r
+                        JOIN LibraryRecipe lr ON lr.RecipeId = r.Id
+                        JOIN [User] u ON r.UserId = u.Id
+                        WHERE lr.UserId = @UserId
+                    ";
+                    cmd.Parameters.AddWithValue("@UserId", userId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -32,7 +33,7 @@ namespace Yumyki.Repositories
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                                CreatorName = reader.GetString(reader.GetOrdinal("[User].Username")),
+                                CreatorName = reader.GetString(reader.GetOrdinal("Username")),
                                 RecipeName = reader.GetString(reader.GetOrdinal("RecipeName")),
                                 RecipeType = reader.GetString(reader.GetOrdinal("RecipeType")),
                                 RecipeImageURL = reader.IsDBNull(reader.GetOrdinal("RecipeImageURL")) ? "No Image URL" : reader.GetString(reader.GetOrdinal("RecipeImageURL")),
@@ -69,7 +70,7 @@ namespace Yumyki.Repositories
             }
         }
 
-        public void DeleteRecipeFromLibrary(int Id)
+        public void DeleteRecipeFromLibrary(int recipeId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -78,9 +79,9 @@ namespace Yumyki.Repositories
                 {
                     cmd.CommandText = @"
                         DELETE FROM LibraryRecipe
-                        WHERE Id = @Id
+                        WHERE RecipeId = @RecipeId
                     ";
-                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.Parameters.AddWithValue("@RecipeId", recipeId);
 
                     cmd.ExecuteNonQuery();
                 }
